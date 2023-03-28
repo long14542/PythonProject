@@ -2,7 +2,7 @@ import tkinter
 import tkinter.ttk
 import tkinter.messagebox
 from Database import *
-import Values
+from Values import *
 
 class InsertWindow:
     def __init__(self):
@@ -75,9 +75,9 @@ class InsertWindow:
     def Insert(self):
         self.values = Values()
         self.database = Database()
-        self.test = self.values.Validate(self.idEntry.get(), self.fNameEntry.get(), self.lNameEntry.get(), self.phoneEntry.get(), self.emailEntry.get(), self.waterclockEntry)
+        self.test = self.values.Validate(self.idEntry.get(), self.fNameEntry.get(), self.lNameEntry.get(), self.phoneEntry.get(), self.emailEntry.get(), self.waterclockEntry.get())
         if (self.test == "SUCCESS"):
-            self.database.Insert(self.idEntry.get(), self.fNameEntry.get(), self.lNameEntry.get(), self.dobBox.get(), self.mobBox.get(), self.yobBox.get(), self.genderBox.get(), self.addressEntry.get(), self.phoneEntry.get(), self.emailEntry.get(), self.waterclockEntry)
+            self.database.Insert(self.idEntry.get(), self.fNameEntry.get(), self.lNameEntry.get(), self.dobBox.get(), self.mobBox.get(), self.yobBox.get(), self.genderBox.get(), self.addressEntry.get(), self.phoneEntry.get(), self.emailEntry.get(), self.waterclockEntry.get())
             tkinter.messagebox.showinfo("Inserted data", "Successfully inserted the above data in the database")
         else:
             self.valueErrorMessage = "Invalid input in field " + self.test 

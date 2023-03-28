@@ -15,7 +15,7 @@ class Database:
         self.dbConnection.commit()
 
     def Update(self,  fName, lName, dob, mob, yob, gender, address, phone, email,waterclock,id):
-        self.dbCursor.execute("UPDATE client_info SET fName = ?, lName = ?, dob = ?, mob = ?, yob = ?, gender = ?, address = ?, phone = ?, email = ?, waterclock = ?, WHERE id = ?", (fName, lName, dob, mob, yob, gender, address, phone, email, waterclock, id))
+        self.dbCursor.execute("UPDATE client_info SET fName = ?, lName = ?, dob = ?, mob = ?, yob = ?, gender = ?, address = ?, phone = ?, email = ?, waterclock = ? WHERE id = ?", (fName, lName, dob, mob, yob, gender, address, phone, email, waterclock, id))
         self.dbConnection.commit()
 
     def Search(self, id):

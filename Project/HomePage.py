@@ -63,9 +63,6 @@ class HomePage:
         self.data = self.database.Display()
         self.displayWindow = DatabaseView(self.data)
 
-    def Quit(self): #cho them function pickle de luu du lieu vao
-        pass
-
     def Plotting(self):
         pass
 

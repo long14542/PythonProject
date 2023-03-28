@@ -10,7 +10,7 @@ class Values:
             return "phone"
         elif not (email.count("@") == 1 and email.count(".") > 0):
             return "email"
-        elif not (waterclock.isdigit()) and (len(waterclock) == 5):
-            return "water clock"
+        elif not (waterclock.isdigit()):
+            return "waterclock"
         else:
             return "SUCCESS"

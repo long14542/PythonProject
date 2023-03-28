@@ -21,7 +21,7 @@ class HomePage:
         tkinter.Button(self.homePageWindow, width = 20, text = "Delete", command = self.Delete).grid(pady = 15, column = 1, row = 5)
         tkinter.Button(self.homePageWindow, width = 20, text = "Display", command = self.Display).grid(pady = 15, column = 1, row = 6)
         tkinter.Button(self.homePageWindow, width= 20, text = "Plotting", command = self.Plotting).grid(pady = 15, column = 1 , row = 7)     #sau nay cho them function plot
-        tkinter.Button(self.homePageWindow, width = 20, text = "Exit", command = self.Exit).grid(pady = 15, column = 1, row = 8)
+        tkinter.Button(self.homePageWindow, width = 20, text = "Exit", command = self.homePageWindow.destroy).grid(pady = 15, column = 1, row = 8)
 
         self.homePageWindow.mainloop()
 
@@ -62,10 +62,6 @@ class HomePage:
         self.database = Database()
         self.data = self.database.Display()
         self.displayWindow = DatabaseView(self.data)
-
-    def Exit(self): #cho them function pickle de luu du lieu vao
-        self.database = Database()
-        self.exitwindow = self.homePageWindow.destroy
 
     def Plotting(self):
         pass

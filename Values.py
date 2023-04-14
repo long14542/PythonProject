@@ -1,5 +1,5 @@
 class Values:
-    def Validate(self, id, fName, lName, phone, email,wateramount):
+    def Validate(self, id, fName, lName, phone, email, wateramount):
         if not (id.isdigit() and (len(id) == 3)):
             return "id"
         elif not (fName.isalpha()):

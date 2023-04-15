@@ -160,13 +160,29 @@ class HomePage():
     def Insert(self):
         self.values = Values()
         self.database = Database()
-        self.test = self.values.Validate(self.idEntry.get(), self.fNameEntry.get(), self.lNameEntry.get(), self.phoneEntry.get(), self.emailEntry.get(), self.wateramountEntry.get(),)
+        self.test = self.values.Validate(self.idEntry.get(), self.phoneEntry.get(), self.emailEntry.get(), self.wateramountEntry.get(),)
         if (self.test == "SUCCESS"):
             self.database.Insert(self.idEntry.get(), self.fNameEntry.get(), self.lNameEntry.get(), self.dobBox.get(), self.mobBox.get(), self.yobBox.get(), self.genderBox.get(), self.addressEntry.get(), self.phoneEntry.get(), self.emailEntry.get(), self.billperiodfrom_dateBox.get(), self.billperiodfrom_monthBox.get(),self.billperiodfrom_yearBox.get(), self.billperiodto_dateBox.get(), self.billperiodto_monthBox.get(), self.billperiodto_yearBox.get(),self.wateramountEntry.get())
             tkinter.messagebox.showinfo("Inserted data", "Successfully inserted the above data in the database")
             self.Reset()
             self.clientinfo_treeview.delete(*self.clientinfo_treeview.get_children())
             self.query_database()
+            '''
+            self.bDetail_text.delete(1.0, tkinter.END)
+            self.bDetail_text.insert(tkinter.END, f'\n\t             CLIENT ID:\t{self.idEntry.get()}')
+            self.bDetail_text.insert(tkinter.END, f'\n  ---------------------------------------------------------------')
+            self.bDetail_text.insert(tkinter.END, f'\n\tName:                \t{self.fNameEntry.get()} {self.lNameEntry.get()}')
+            self.bDetail_text.insert(tkinter.END, f'\n\tGender:              \t{self.genderBox.get()}')
+            self.bDetail_text.insert(tkinter.END, f'\n\tDOB:                  \t{self.dobBox.get()} - {self.mobBox.get()} - {self.yobBox.get()}')
+            self.bDetail_text.insert(tkinter.END, f'\n\tAddress:             \t{self.addressEntry.get()}')
+            self.bDetail_text.insert(tkinter.END, f'\n\tEmail:                 \t{self.emailEntry.get()}')
+            self.bDetail_text.insert(tkinter.END, f'\n\tPhone number:    \t{self.phoneEntry.get()}')
+            self.bDetail_text.insert(tkinter.END, f'\n  ---------------------------------------------------------------')
+            self.bDetail_text.insert(tkinter.END, f'\n\tPeriod:               \t{self.billperiodfrom_dateBox.get()}/{self.billperiodfrom_monthBox.get()}/{self.billperiodfrom_yearBox.get()} - {self.billperiodto_dateBox.get()}/{self.billperiodto_monthBox.get()}/{self.billperiodto_yearBox.get()}')
+            self.bDetail_text.insert(tkinter.END, f'\n\tWater Consumtion(m3): \t{self.wateramountEntry.get()}')
+            self.bDetail_text.insert(tkinter.END, f'\n  ---------------------------------------------------------------')
+            self.bDetail_text.insert(tkinter.END, f'\n\tTOTAL DUE:        \t\n')
+            '''
         else:
             self.valueErrorMessage = "Invalid input in field " + self.test 
             tkinter.messagebox.showerror("Value Error", self.valueErrorMessage)

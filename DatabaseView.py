@@ -40,7 +40,7 @@ class DatabaseView:
 
         # Treeview columns
         self.databaseView.column("id",anchor= "center", width = 40)
-        self.databaseView.column("Name",anchor= "center", width = 100)
+        self.databaseView.column("Name",anchor= "center", width = 200)
         self.databaseView.column("dob",anchor= "center", width = 120)
         self.databaseView.column("gender", anchor= "center",width = 60)
         self.databaseView.column("address",anchor= "center", width = 200)

@@ -4,7 +4,7 @@ class Database:
     def __init__(self):
         self.dbConnection = sqlite3.connect("dbFile.db")
         self.dbCursor = self.dbConnection.cursor()
-        self.dbCursor.execute("CREATE TABLE IF NOT EXISTS client_info (id PRIMARYKEY text, fName text, lName text, dob text, mob text, yob text, gender text, address text, phone text, email text, billperiodfrom_date text, billperiodfrom_month text, billperiodfrom_year text, billperiodto_date text, billperiodto_month text, billperiodto_year text, wateramount real, charges real)")        
+        self.dbCursor.execute("CREATE TABLE IF NOT EXISTS client_info (id PRIMARYKEY text, fName text, lName text, dob text, mob text, yob text, gender text, address text, phone text, email text, billperiodfrom_date text, billperiodfrom_month text, billperiodfrom_year text, billperiodto_date text, billperiodto_month text, billperiodto_year text, wateramount real, charges real, UNIQUE (id))")        
         self.calculate_watercharges()
         self.dbConnection.commit()
 
@@ -18,6 +18,12 @@ class Database:
     def __del__(self):
         self.dbCursor.close()
         self.dbConnection.close()
+
+    def check_id_exist(self, id):
+        self.dbCursor.execute("SELECT * FROM client_info WHERE id = ?", (id,))
+        self.row = self.dbCursor.fetchone()
+        if not (self.row is None): # if id is already exist
+            return "exist"
 
     def Insert(self, id, fName, lName, dob, mob, yob, gender, address, phone, email, billperiodfrom_date, billperiodfrom_month, billperiodfrom_year, billperiodto_date,billperiodto_month, billperiodto_year, wateramount, charges= 94.99):
         self.dbCursor.execute("INSERT INTO client_info VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?)",(id, fName, lName, dob, mob, yob, gender, address, phone, email, billperiodfrom_date,billperiodfrom_month, billperiodfrom_year , billperiodto_date, billperiodto_month,billperiodto_year ,wateramount, charges))        

@@ -184,8 +184,11 @@ class HomePage():
             self.bDetail_text.insert(tkinter.END, f'\n\tTOTAL DUE (VND):        \t\n')
             '''
         else:
-            self.valueErrorMessage = "Invalid input in field " + self.test 
-            tkinter.messagebox.showerror("Value Error", self.valueErrorMessage)
+            if self.test == "existed id":
+                tkinter.messagebox.showerror("Value Error", "This ID has already existed:\n-> Please enter the ID again")
+            else:
+                self.valueErrorMessage = "Invalid input in field " + self.test 
+                tkinter.messagebox.showerror("Value Error", self.valueErrorMessage)
 
     def Reset(self):
         self.idEntry.delete(0, tkinter.END)

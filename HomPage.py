@@ -164,10 +164,7 @@ class HomePage():
         if (self.test == "SUCCESS"):
             self.database.Insert(self.idEntry.get(), self.fNameEntry.get(), self.lNameEntry.get(), self.dobBox.get(), self.mobBox.get(), self.yobBox.get(), self.genderBox.get(), self.addressEntry.get(), self.phoneEntry.get(), self.emailEntry.get(), self.billperiodfrom_dateBox.get(), self.billperiodfrom_monthBox.get(),self.billperiodfrom_yearBox.get(), self.billperiodto_dateBox.get(), self.billperiodto_monthBox.get(), self.billperiodto_yearBox.get(),self.wateramountEntry.get())
             tkinter.messagebox.showinfo("Inserted data", "Successfully inserted the above data in the database")
-            self.Reset()
-            self.clientinfo_treeview.delete(*self.clientinfo_treeview.get_children())
-            self.query_database()
-            '''
+            
             self.bDetail_text.delete(1.0, tkinter.END)
             self.bDetail_text.insert(tkinter.END, f'\n\t             CLIENT ID:\t{self.idEntry.get()}')
             self.bDetail_text.insert(tkinter.END, f'\n  ---------------------------------------------------------------')
@@ -181,8 +178,13 @@ class HomePage():
             self.bDetail_text.insert(tkinter.END, f'\n\tPeriod:               \t{self.billperiodfrom_dateBox.get()}/{self.billperiodfrom_monthBox.get()}/{self.billperiodfrom_yearBox.get()} - {self.billperiodto_dateBox.get()}/{self.billperiodto_monthBox.get()}/{self.billperiodto_yearBox.get()}')
             self.bDetail_text.insert(tkinter.END, f'\n\tWater Consumtion(m3): \t{self.wateramountEntry.get()}')
             self.bDetail_text.insert(tkinter.END, f'\n  ---------------------------------------------------------------')
-            self.bDetail_text.insert(tkinter.END, f'\n\tTOTAL DUE (VND):        \t\n')
-            '''
+            self.bDetail_text.insert(tkinter.END, f'\n\tTOTAL DUE:            \t{self.database.returnCharge(self.idEntry.get())}')
+            self.bDetail_text.insert(tkinter.END, f'\n\t (VND):        \t\n')
+            
+            self.Reset()
+            self.clientinfo_treeview.delete(*self.clientinfo_treeview.get_children())
+            self.query_database()
+            
         else:
             if self.test == "existed id":
                 tkinter.messagebox.showerror("Value Error", "This ID has already existed:\n-> Please enter the ID again")
@@ -222,26 +224,27 @@ class HomePage():
         self.query_database()
         tkinter.messagebox.showinfo("deleted data","Deleted successfully!")        
 
-    def treeview_billDetails_afterUpdate(self, item):
+    def treeview_billDetails_afterUpdate(self, item, attr):
         # Cập nhật Treeview của window 1 khi có thay đổi trên window 2
         self.clientinfo_treeview.delete(*self.clientinfo_treeview.get_children())
         for record in item:
             self.clientinfo_treeview.insert('',"end", values= record)
-            self.bDetail_text.delete(1.0, tkinter.END)
-            self.bDetail_text.insert(tkinter.END, f'\n\t             Client ID:\t{record[0]}')
-            self.bDetail_text.insert(tkinter.END, f'\n------------------------------------------------------------------')
-            self.bDetail_text.insert(tkinter.END, f'\n\tName:                \t{record[1]}')
-            self.bDetail_text.insert(tkinter.END, f'\n\tGender:              \t{record[3]}')
-            self.bDetail_text.insert(tkinter.END, f'\n\tDOB:                  \t{record[2]}')
-            self.bDetail_text.insert(tkinter.END, f'\n\tAddress:             \t{record[4]}')
-            self.bDetail_text.insert(tkinter.END, f'\n\tEmail:                 \t{record[6]}')
-            self.bDetail_text.insert(tkinter.END, f'\n\tPhone number:    \t{record[5]}')
-            self.bDetail_text.insert(tkinter.END, f'\n------------------------------------------------------------------')
-            self.bDetail_text.insert(tkinter.END, f'\n\tPeriod:                \t{record[7]}')
-            self.bDetail_text.insert(tkinter.END, f'\n\tWater Consumtion(m3): \t{record[8]}')
-            self.bDetail_text.insert(tkinter.END, f'\n------------------------------------------------------------------')
-            self.bDetail_text.insert(tkinter.END, f'\n\tTOTAL DUE:        \t{record[9]}\n')
+
         # update info in bill details after updating data
+        self.bDetail_text.delete(1.0, tkinter.END)
+        self.bDetail_text.insert(tkinter.END, f'\n\t             Client ID:\t{attr[0][0]}')
+        self.bDetail_text.insert(tkinter.END, f'\n------------------------------------------------------------------')
+        self.bDetail_text.insert(tkinter.END, f'\n\tName:                \t{attr[0][1]}')
+        self.bDetail_text.insert(tkinter.END, f'\n\tGender:              \t{attr[0][3]}')
+        self.bDetail_text.insert(tkinter.END, f'\n\tDOB:                  \t{attr[0][2]}')
+        self.bDetail_text.insert(tkinter.END, f'\n\tAddress:             \t{attr[0][4]}')
+        self.bDetail_text.insert(tkinter.END, f'\n\tEmail:                 \t{attr[0][6]}')
+        self.bDetail_text.insert(tkinter.END, f'\n\tPhone number:    \t{attr[0][5]}')
+        self.bDetail_text.insert(tkinter.END, f'\n------------------------------------------------------------------')
+        self.bDetail_text.insert(tkinter.END, f'\n\tPeriod:                \t{attr[0][7]}')
+        self.bDetail_text.insert(tkinter.END, f'\n\tWater Consumtion(m3): \t{attr[0][8]}')
+        self.bDetail_text.insert(tkinter.END, f'\n------------------------------------------------------------------')
+        self.bDetail_text.insert(tkinter.END, f'\n\tTOTAL DUE:        \t{attr[0][9]}\n')
 
     def Update(self):
         x = self.clientinfo_treeview.selection()[0]
@@ -268,7 +271,7 @@ class HomePage():
         self.bDetail_text.insert(tkinter.END, f'\n\tPeriod:               \t{self.values[7]}')
         self.bDetail_text.insert(tkinter.END, f'\n\tWater Consumtion(m3): \t{self.values[8]}')
         self.bDetail_text.insert(tkinter.END, f'\n  ---------------------------------------------------------------')
-        self.bDetail_text.insert(tkinter.END, f'\n\tTOTAL DUE:            \t{self.values[9]}')
+        self.bDetail_text.insert(tkinter.END, f'\n\tTOTAL DUE:        \t{self.values[9]}')
         self.bDetail_text.insert(tkinter.END, f'\n\t  (VND)\n')
     
     def query_database(self):

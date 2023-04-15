@@ -111,7 +111,8 @@ class UpdateWindow:
         self.database = Database()
         self.database.Update(self.fNameEntry.get(), self.lNameEntry.get(), self.dobBox.get(), self.mobBox.get(), self.yobBox.get(), self.genderBox.get(), self.addressEntry.get(), self.phoneEntry.get(), self.emailEntry.get(), self.billperiodfrom_dateBox.get(), self.billperiodfrom_monthBox.get(), self.billperiodfrom_yearBox.get() ,self.billperiodto_dateBox.get(), self.billperiodto_monthBox.get(), self.billperiodto_yearBox.get() ,self.wateramountEntry.get(), self.id)
         self.d = self.database.Display()
-        self.callback(self.d)
+        self.e = self.database.Search2(self.id)
+        self.callback(self.d, self.e)
         tkinter.messagebox.showinfo("Updated data", "Successfully updated the above data in the database")
 
     def Reset(self):

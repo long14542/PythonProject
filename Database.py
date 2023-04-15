@@ -14,6 +14,11 @@ class Database:
         self.dbCursor.execute("UPDATE client_info SET charges = 10.00*5.973+ 10.00*7.052 +(wateramount-20.00)*8.669 WHERE wateramount >= 20.00 and wateramount <30")
         self.dbCursor.execute("UPDATE client_info SET charges = 10.00*5.973+10.00*7.052+10.00*8.669+(wateramount-30.00)*15.929 WHERE 30.00<=wateramount")
         self.dbConnection.commit()
+
+    def returnCharge(self, id):
+        self.dbCursor.execute("SELECT charges from client_info WHERE id=?", (id,))
+        charge = self.dbCursor.fetchone() # return a tuple
+        return charge[0]
     
     def __del__(self):
         self.dbCursor.close()
@@ -37,7 +42,7 @@ class Database:
 
     def Search(self, id):
         self.dbCursor.execute("SELECT id,fName,lName,dob,mob ,yob, gender, address, phone, email, billperiodfrom_date, billperiodfrom_month, billperiodfrom_year,billperiodto_date, billperiodto_month, billperiodto_year, wateramount FROM client_info WHERE id = ?", (id, ))
-        searchResults = self.dbCursor.fetchall()
+        searchResults = self.dbCursor.fetchall() # return a dict which each element is a tuple
         return searchResults
     
     def Search2(self, id):

@@ -26,6 +26,7 @@ class Database:
 
     def Update(self, fName, lName, dob, mob, yob, gender, address, phone, email, billperiodfrom_date,billperiodfrom_month, billperiodfrom_year, billperiodto_date, billperiodto_month, billperiodto_year, wateramount,id):
         self.dbCursor.execute("UPDATE client_info SET fName = ?, lName = ?, dob = ?, mob = ?, yob = ?, gender = ?, address = ?, phone = ?, email = ?, billperiodfrom_date = ? , billperiodfrom_month = ? ,billperiodfrom_year = ? ,billperiodto_date = ?, billperiodto_month = ?,billperiodto_year = ?, wateramount = ? WHERE id = ?", (fName, lName, dob, mob, yob, gender, address, phone, email, billperiodfrom_date, billperiodfrom_month,billperiodfrom_year ,billperiodto_date,billperiodto_month, billperiodto_year ,wateramount, id))
+        self.calculate_watercharges()
         self.dbConnection.commit()
 
     def Search(self, id):
@@ -43,6 +44,7 @@ class Database:
         self.dbConnection.commit()
     
     def Display(self):  
+        self.calculate_watercharges()
         self.dbCursor.execute("SELECT id,lName || ' ' || fName  AS Name, dob || '-' || mob || '-' || yob AS DOB, gender, address, phone, email, billperiodfrom_date|| '/' || billperiodfrom_month || '/' || billperiodfrom_year || ' - ' || billperiodto_date || '/' || billperiodto_month || '/' || billperiodto_year AS billperiod, wateramount, charges FROM client_info")
         self.dbConnection.commit()
         records = self.dbCursor.fetchall()

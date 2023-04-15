@@ -146,7 +146,7 @@ class HomePage():
         self.clientinfo_treeview.heading("Email",text="Email", anchor= "center")
         self.clientinfo_treeview.heading("Bill period",text="Bill period", anchor= "center")
         self.clientinfo_treeview.heading("Amount of water",text="Amount of water (m3)", anchor= "center")
-        self.clientinfo_treeview.heading("Charges",text="Charges", anchor= "center")
+        self.clientinfo_treeview.heading("Charges",text="Charges (VND)", anchor= "center")
         
         # buttons
         tkinter.Button(self.F3, width = 10, text = "Search",command = self.Search).place(x=1010, y =70)
@@ -181,7 +181,7 @@ class HomePage():
             self.bDetail_text.insert(tkinter.END, f'\n\tPeriod:               \t{self.billperiodfrom_dateBox.get()}/{self.billperiodfrom_monthBox.get()}/{self.billperiodfrom_yearBox.get()} - {self.billperiodto_dateBox.get()}/{self.billperiodto_monthBox.get()}/{self.billperiodto_yearBox.get()}')
             self.bDetail_text.insert(tkinter.END, f'\n\tWater Consumtion(m3): \t{self.wateramountEntry.get()}')
             self.bDetail_text.insert(tkinter.END, f'\n  ---------------------------------------------------------------')
-            self.bDetail_text.insert(tkinter.END, f'\n\tTOTAL DUE:        \t\n')
+            self.bDetail_text.insert(tkinter.END, f'\n\tTOTAL DUE (VND):        \t\n')
             '''
         else:
             self.valueErrorMessage = "Invalid input in field " + self.test 
@@ -265,8 +265,9 @@ class HomePage():
         self.bDetail_text.insert(tkinter.END, f'\n\tPeriod:               \t{self.values[7]}')
         self.bDetail_text.insert(tkinter.END, f'\n\tWater Consumtion(m3): \t{self.values[8]}')
         self.bDetail_text.insert(tkinter.END, f'\n  ---------------------------------------------------------------')
-        self.bDetail_text.insert(tkinter.END, f'\n\tTOTAL DUE:        \t{self.values[9]}\n')
-        
+        self.bDetail_text.insert(tkinter.END, f'\n\tTOTAL DUE:            \t{self.values[9]}')
+        self.bDetail_text.insert(tkinter.END, f'\n\t  (VND)\n')
+    
     def query_database(self):
         self.database = Database()
         records=self.database.Display()

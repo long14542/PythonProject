@@ -36,7 +36,7 @@ class DatabaseView:
         self.databaseView.heading("email", text = "Email ID")
         self.databaseView.heading("billperiod", text = "Bill period")
         self.databaseView.heading("wateramount", text= "Amount of water (liter)")
-        self.databaseView.heading("charges", text= "Charges")
+        self.databaseView.heading("charges", text= "Charges (VND)")
 
         # Treeview columns
         self.databaseView.column("id",anchor= "center", width = 40)

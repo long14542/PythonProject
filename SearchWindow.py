@@ -9,21 +9,17 @@ class SearchDeleteWindow:
         window = tk.Tk()
         window.wm_title(task + " data")
 
-        # Initializing all the variables
         self.id = tk.StringVar()
         self.fName = tk.StringVar()
         self.lName = tk.StringVar()
         self.heading = "Please enter client ID to " + task
 
-        # Labels
         tk.Label(window, text=self.heading, width=50).grid(pady=20, row=1)
         tk.Label(window, text="client ID", width=10).grid(pady=5, row=2)
 
-        # Entry widgets
         self.idEntry = tk.Entry(window, width=5, textvariable=self.id)
         self.idEntry.grid(pady=5, row=3)
 
-        # Button widgets
         if task == "Search":
             tk.Button(window, width=20, text=task, command=self.Search).grid(pady=15, padx=5, column=1, row=14)
         elif task == "Delete":

@@ -1,9 +1,8 @@
 import tkinter
 import tkinter.ttk
 import tkinter.messagebox
-from Database import *
-from DatabaseView import *
-
+from Database import Database
+from DatabaseView import DatabaseView
 
 class SearchWindow:
     def __init__(self):
@@ -33,5 +32,3 @@ class SearchWindow:
         self.database = Database()
         self.data = self.database.Search2(self.idEntry.get())
         self.databaseView = DatabaseView(self.data)
-    
-        
